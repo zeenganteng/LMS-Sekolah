@@ -91,3 +91,4 @@ Ini baru fondasi dasar. Yang perlu ditambahkan sesuai kebutuhan:
 ## Catatan Keamanan
 
 Jangan lupa: file `.env.local` **jangan pernah di-commit ke Git**. Sudah otomatis dikecualikan lewat `.gitignore`, tapi tetap dicek ulang sebelum push ke GitHub, apalagi kalau repo-nya public.
+hghghghg
