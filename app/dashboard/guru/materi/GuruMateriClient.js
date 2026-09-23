@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 const FORM_KOSONG = { judul: "", deskripsi: "", mataPelajaran: "", kelas: "", fileUrl: "" };
 
-export default function MateriPage() {
+export default function GuruMateriClient() {
   const [materiList, setMateriList] = useState([]);
   const [mapelList, setMapelList] = useState([]);
   const [kelasList, setKelasList] = useState([]);
@@ -64,7 +64,7 @@ export default function MateriPage() {
     setError("");
 
     if (mapelList.length === 0 || kelasList.length === 0) {
-      setError("Bikin dulu minimal 1 Mata Pelajaran dan 1 Kelas sebelum tambah materi");
+      setError("Belum ada Mata Pelajaran/Kelas. Minta Admin untuk menambahkannya dulu.");
       return;
     }
 
@@ -101,7 +101,7 @@ export default function MateriPage() {
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-        <h2>Kelola Materi</h2>
+        <h2>Materi Saya</h2>
         <button style={{ width: "auto", padding: "8px 20px" }} onClick={bukaFormTambah}>
           + Tambah Materi
         </button>
@@ -109,7 +109,7 @@ export default function MateriPage() {
 
       {(mapelList.length === 0 || kelasList.length === 0) && !loading && (
         <div style={{ background: "#fef3c7", padding: 14, borderRadius: 8, marginBottom: 20, color: "#92400e" }}>
-          ⚠️ Bikin dulu minimal 1 <strong>Mata Pelajaran</strong> dan 1 <strong>Kelas</strong> sebelum bisa nambah materi.
+          ⚠️ Belum ada Mata Pelajaran atau Kelas yang terdaftar. Minta Admin untuk menambahkannya dulu.
         </div>
       )}
 
@@ -174,7 +174,6 @@ export default function MateriPage() {
               <th style={{ padding: 12 }}>Judul</th>
               <th style={{ padding: 12 }}>Mata Pelajaran</th>
               <th style={{ padding: 12 }}>Kelas</th>
-              <th style={{ padding: 12 }}>Diupload Oleh</th>
               <th style={{ padding: 12 }}>Aksi</th>
             </tr>
           </thead>
@@ -184,7 +183,6 @@ export default function MateriPage() {
                 <td style={{ padding: 12 }}>{m.judul}</td>
                 <td style={{ padding: 12 }}>{m.mataPelajaran?.nama || "-"}</td>
                 <td style={{ padding: 12 }}>{m.kelas?.nama || "-"}</td>
-                <td style={{ padding: 12 }}>{m.guru?.nama || "-"}</td>
                 <td style={{ padding: 12, display: "flex", gap: 8 }}>
                   <button style={{ width: "auto", padding: "6px 14px", backgroundColor: "#f59e0b" }} onClick={() => bukaFormEdit(m)}>Edit</button>
                   <button style={{ width: "auto", padding: "6px 14px", backgroundColor: "#dc2626" }} onClick={() => handleDelete(m._id, m.judul)}>Hapus</button>
@@ -192,7 +190,7 @@ export default function MateriPage() {
               </tr>
             ))}
             {materiList.length === 0 && (
-              <tr><td colSpan={5} style={{ padding: 20, textAlign: "center", color: "#64748b" }}>Belum ada materi</td></tr>
+              <tr><td colSpan={4} style={{ padding: 20, textAlign: "center", color: "#64748b" }}>Belum ada materi. Yuk tambah materi pertamamu!</td></tr>
             )}
           </tbody>
         </table>

@@ -10,11 +10,6 @@ const MENU = [
   { label: "Kelas", href: "/dashboard/admin/kelas" },
   { label: "Mata Pelajaran", href: "/dashboard/admin/mata-pelajaran" },
   { label: "Materi", href: "/dashboard/admin/materi" },
-  { label: "Tugas", href: "/dashboard/admin/tugas" },
-  { label: "Quiz/Ujian", href: "/dashboard/admin/quiz" },
-  { label: "Nilai", href: "/dashboard/admin/nilai" },
-  { label: "Laporan", href: "/dashboard/admin/laporan" },
-  { label: "Pengaturan", href: "/dashboard/admin/pengaturan" },
 ];
 
 export default function AdminSidebar() {
