@@ -10,26 +10,6 @@ async function pastikanAdmin() {
   return session;
 }
 
-export async function PUT(request, { params }) {
-  const session = await pastikanAdmin();
-  if (!session) return NextResponse.json({ error: "Akses ditolak" }, { status: 403 });
-
-  await dbConnect();
-  const { id } = params;
-  const body = await request.json();
-
-  const kelasTerupdate = await Kelas.findByIdAndUpdate(id, body, {
-    new: true,
-    runValidators: true,
-  });
-
-  if (!kelasTerupdate) {
-    return NextResponse.json({ error: "Kelas tidak ditemukan" }, { status: 404 });
-  }
-
-  return NextResponse.json({ message: "Kelas berhasil diupdate" });
-}
-
 export async function DELETE(request, { params }) {
   const session = await pastikanAdmin();
   if (!session) return NextResponse.json({ error: "Akses ditolak" }, { status: 403 });

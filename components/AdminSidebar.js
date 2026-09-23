@@ -9,7 +9,6 @@ const MENU = [
   { label: "Siswa", href: "/dashboard/admin/siswa" },
   { label: "Kelas", href: "/dashboard/admin/kelas" },
   { label: "Mata Pelajaran", href: "/dashboard/admin/mata-pelajaran" },
-  { label: "Materi", href: "/dashboard/admin/materi" },
 ];
 
 export default function AdminSidebar() {
