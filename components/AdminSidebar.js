@@ -4,30 +4,57 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const MENU = [
-  { label: "Dashboard", href: "/dashboard/admin" },
-  { label: "Guru", href: "/dashboard/admin/guru" },
-  { label: "Siswa", href: "/dashboard/admin/siswa" },
-  { label: "Kelas", href: "/dashboard/admin/kelas" },
-  { label: "Mata Pelajaran", href: "/dashboard/admin/mata-pelajaran" },
+  { label: "Dashboard", href: "/dashboard/admin", icon: "📊" },
+  { label: "Guru", href: "/dashboard/admin/guru", icon: "👨‍🏫" },
+  { label: "Siswa", href: "/dashboard/admin/siswa", icon: "🎓" },
+  { label: "Kelas", href: "/dashboard/admin/kelas", icon: "🏫" },
+  { label: "Mata Pelajaran", href: "/dashboard/admin/mata-pelajaran", icon: "📖" },
+  { label: "Pengumuman", href: "/dashboard/admin/pengumuman", icon: "📢" },
 ];
 
 export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside style={{ width: 220, background: "white", borderRight: "1px solid #e2e8f0" }}>
+    <aside
+      style={{
+        width: 240,
+        background: "white",
+        borderRight: "1px solid #e2e8f0",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <div
         style={{
-          background: "#2563eb",
-          color: "white",
-          padding: "20px 16px",
-          textAlign: "center",
-          fontWeight: "bold",
+          padding: "22px 20px",
+          borderBottom: "1px solid #e2e8f0",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
         }}
       >
-        LMS SEKOLAH
+        <div
+          style={{
+            width: 36,
+            height: 36,
+            borderRadius: 8,
+            background: "#4f46e5",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 18,
+          }}
+        >
+          🎓
+        </div>
+        <div>
+          <div style={{ fontWeight: 700, fontSize: 15 }}>LMS Sekolah</div>
+          <div style={{ fontSize: 11, color: "#94a3b8" }}>Panel Admin</div>
+        </div>
       </div>
-      <nav style={{ padding: "12px 0" }}>
+
+      <nav style={{ padding: "16px 12px", flex: 1 }}>
         {MENU.map((item) => {
           const aktif =
             item.href === "/dashboard/admin"
@@ -39,15 +66,20 @@ export default function AdminSidebar() {
               key={item.href}
               href={item.href}
               style={{
-                display: "block",
-                padding: "10px 20px",
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "10px 14px",
+                marginBottom: 4,
+                borderRadius: 8,
                 textDecoration: "none",
-                color: aktif ? "#2563eb" : "#334155",
-                background: aktif ? "#dbeafe" : "transparent",
-                borderRight: aktif ? "3px solid #2563eb" : "3px solid transparent",
-                fontWeight: aktif ? "600" : "400",
+                color: aktif ? "#4f46e5" : "#334155",
+                background: aktif ? "#eef2ff" : "transparent",
+                fontWeight: aktif ? 600 : 500,
+                fontSize: 14,
               }}
             >
+              <span>{item.icon}</span>
               {item.label}
             </Link>
           );

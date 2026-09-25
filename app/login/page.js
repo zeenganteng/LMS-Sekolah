@@ -29,34 +29,34 @@ export default function LoginPage() {
       return;
     }
 
-    // Setelah login sukses, arahkan ke halaman dashboard umum,
-    // nanti halaman itu yang redirect sesuai role masing-masing
     router.push("/dashboard");
   }
 
   return (
-    <div className="container">
-      <h1 style={{ marginBottom: 24 }}>Login LMS Sekolah</h1>
-      <form onSubmit={handleSubmit}>
-        {error && <p className="error">{error}</p>}
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Memproses..." : "Masuk"}
-        </button>
-      </form>
+    <div className="login-page">
+      <div className="container">
+        <h1 style={{ marginBottom: 24 }}>Login LMS Sekolah</h1>
+        <form onSubmit={handleSubmit}>
+          {error && <p className="error">{error}</p>}
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Memproses..." : "Masuk"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
