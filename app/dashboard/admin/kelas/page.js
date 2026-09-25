@@ -58,39 +58,32 @@ export default function KelasPage() {
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+      <div className="card-header">
         <h2>Kelola Kelas</h2>
-        <button style={{ width: "auto", padding: "8px 20px" }} onClick={() => setShowForm(true)}>
+        <button className="btn-auto" onClick={() => setShowForm(true)}>
           + Tambah Kelas
         </button>
       </div>
 
       {showForm && (
-        <div style={{ background: "white", padding: 20, borderRadius: 8, marginBottom: 24, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
-          <h3 style={{ marginBottom: 16 }}>Tambah Kelas Baru</h3>
-          <p style={{ fontSize: 13, color: "#64748b", marginBottom: 12 }}>
-            Nama kelas & nomor rombel otomatis dibuat. Contoh: pilih Tingkat 10 + Jurusan PPLG → jadi "10 PPLG 1", tambah lagi otomatis "10 PPLG 2".
+        <div className="card" style={{ marginBottom: 20 }}>
+          <h3 style={{ marginBottom: 8 }}>Tambah Kelas Baru</h3>
+          <p style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 16 }}>
+            Nama & nomor rombel dibuat otomatis. Contoh: Tingkat 10 + Jurusan PPLG →
+            "10 PPLG 1", ditambah lagi jadi "10 PPLG 2".
           </p>
           <form onSubmit={handleSubmit}>
             {error && <p className="error">{error}</p>}
 
-            <label style={{ fontSize: 13, color: "#334155" }}>Tingkat</label>
-            <select
-              value={tingkat}
-              onChange={(e) => setTingkat(e.target.value)}
-              style={{ display: "block", width: "100%", padding: 10, marginBottom: 12, marginTop: 4, borderRadius: 4, border: "1px solid #ccc" }}
-            >
+            <label>Tingkat</label>
+            <select value={tingkat} onChange={(e) => setTingkat(e.target.value)}>
               {TINGKAT_LIST.map((t) => (
                 <option key={t} value={t}>{t}</option>
               ))}
             </select>
 
-            <label style={{ fontSize: 13, color: "#334155" }}>Jurusan</label>
-            <select
-              value={jurusan}
-              onChange={(e) => setJurusan(e.target.value)}
-              style={{ display: "block", width: "100%", padding: 10, marginBottom: 12, marginTop: 4, borderRadius: 4, border: "1px solid #ccc" }}
-            >
+            <label>Jurusan</label>
+            <select value={jurusan} onChange={(e) => setJurusan(e.target.value)}>
               {JURUSAN_LIST.map((j) => (
                 <option key={j} value={j}>{j}</option>
               ))}
@@ -98,41 +91,48 @@ export default function KelasPage() {
 
             <div style={{ display: "flex", gap: 8 }}>
               <button type="submit">Tambah Kelas</button>
-              <button type="button" onClick={() => setShowForm(false)} style={{ backgroundColor: "#94a3b8" }}>Batal</button>
+              <button type="button" className="btn-secondary" onClick={() => setShowForm(false)}>
+                Batal
+              </button>
             </div>
           </form>
         </div>
       )}
 
-      {loading ? (
-        <p>Memuat data...</p>
-      ) : (
-        <table style={{ width: "100%", borderCollapse: "collapse", background: "white", borderRadius: 8, overflow: "hidden" }}>
+      <div className="table-wrap">
+        <table>
           <thead>
-            <tr style={{ background: "#e2e8f0", textAlign: "left" }}>
-              <th style={{ padding: 12 }}>Tingkat</th>
-              <th style={{ padding: 12 }}>Nama Kelas</th>
-              
-              <th style={{ padding: 12 }}>Aksi</th>
+            <tr>
+              <th>Nama Kelas</th>
+              <th>Tingkat</th>
+              <th>Jurusan</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {kelasList.map((k) => (
-              <tr key={k._id} style={{ borderTop: "1px solid #e2e8f0" }}>
-                <td style={{ padding: 12, fontWeight: 600 }}>{k.nama}</td>
-                <td style={{ padding: 12 }}>{k.tingkat}</td>
-                <td style={{ padding: 12 }}>{k.jurusan}</td>
-                <td style={{ padding: 12 }}>
-                  <button style={{ width: "auto", padding: "6px 14px", backgroundColor: "#dc2626" }} onClick={() => handleDelete(k._id, k.nama)}>Hapus</button>
-                </td>
-              </tr>
-            ))}
-            {kelasList.length === 0 && (
-              <tr><td colSpan={4} style={{ padding: 20, textAlign: "center", color: "#64748b" }}>Belum ada kelas</td></tr>
+            {loading ? (
+              <tr><td colSpan={4} className="table-empty">Memuat data...</td></tr>
+            ) : kelasList.length === 0 ? (
+              <tr><td colSpan={4} className="table-empty">Belum ada kelas</td></tr>
+            ) : (
+              kelasList.map((k) => (
+                <tr key={k._id}>
+                  <td style={{ fontWeight: 600 }}>{k.nama}</td>
+                  <td>{k.tingkat}</td>
+                  <td>{k.jurusan}</td>
+                  <td>
+                    <div className="action-buttons">
+                      <button className="btn-auto btn-danger" onClick={() => handleDelete(k._id, k.nama)}>
+                        Hapus
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>
-      )}
+      </div>
     </div>
   );
 }
